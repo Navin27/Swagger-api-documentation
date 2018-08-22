@@ -1,0 +1,165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample for api documentation demo",
+    "version": "1.0.0",
+    "title": "Swagger Local api",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "nkumar@crosslight.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/test",
+  "tags": [
+    {
+      "name": "User",
+      "description": "Everything about your User",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/read": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get data from mlab",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": " response sent",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "server error/server not runing"
+          }
+        }
+      }
+    },
+    "/create": {
+      "post": {
+        "tags": [
+          "Add"
+        ],
+        "summary": "Adding user info to mlab",
+        "description": "Adding user info to mlab server",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object that needs to be added to the mlab server",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Addinfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Delete"
+        ],
+        "summary": "Delete user details",
+        "description": "Delete user details by userID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id to delete user info",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "data has been deleted"
+          },
+          "500": {
+            "description": "Internal Server error"
+          }
+        },
+        "security": [
+          {
+            "user_auth": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "user_auth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-Access-Token"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "First Name": {
+          "type": "string"
+        },
+        "E Mail": {
+          "type": "string"
+        }
+      }
+    },
+    "Addinfo": {
+      "type": "object",
+      "properties": {
+        "First Name": {
+          "type": "string"
+        },
+        "E Mail": {
+          "type": "string"
+        },
+        "Emp ID": {
+          "type": "number"
+        },
+        "Phone No.": {
+          "type": "number"
+        },
+        "Gender": {
+          "type": "string",
+          "enum": [
+            "M",
+            "F"
+          ]
+        }
+      }
+    }
+  }
+}

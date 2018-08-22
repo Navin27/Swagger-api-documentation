@@ -1,0 +1,156 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This is a sample for api documentation demo",
+    "version": "1.0.0",
+    "title": "Swagger Local api",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "nkumar@crosslight.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "description": "Development server",
+      "url": "http://localhost:3000/test"
+    },
+    {
+      "description": "Production server",
+      "url": "https://virtserver.swaggerhub.com/Navin27/testOpenAPI/1.0.0"
+    }
+  ],
+  "tags": [
+    {
+      "name": "User",
+      "description": "User operation from mlab server"
+    }
+  ],
+  "paths": {
+    "/read": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user name and email from mlab server",
+        "responses": {
+          "200": {
+            "description": "Accepted and response result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserInfo"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "501": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/create": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Insert user data",
+        "responses": {
+          "200": {
+            "description": "Accepted and added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserInfo",
+            "in": "path",
+            "description": "userinfo needed to insert",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UserRequest"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "components": {
+    "schemas": {
+      "UserInfo": {
+        "type": "object",
+        "properties": {
+          "First Name": {
+            "type": "string"
+          },
+          "E Mail": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "UserInfo"
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "First Name": {
+            "type": "string"
+          },
+          "E Mail": {
+            "type": "string"
+          },
+          "Last Name": {
+            "type": "string"
+          },
+          "Password": {
+            "type": "string"
+          }
+        }
+      },
+      "UserRequest": {
+        "type": "object",
+        "properties": {
+          "First Name": {
+            "type": "string"
+          },
+          "E Mail": {
+            "type": "string"
+          },
+          "Last Name": {
+            "type": "string"
+          },
+          "Password": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
